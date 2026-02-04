@@ -1,0 +1,231 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    color: #222;
+}
+
+header{
+    background: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+}
+footer {
+    background: #222;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+}
+.left-bar {
+    width: 20%;
+}
+.center-bar {
+    width: 60%;
+}
+.right-bar {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+#home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out 0.2s;
+    width: min(5vw, 5vh);
+    height: min(5vw, 5vh);
+    font-size: min(3vw, 3vh);
+    background-color: #00000000;
+    border: 2pt solid #FFF;
+    color: #FFF;
+    border-radius: 10pt;
+    margin-left: min(2vw, 2vh);
+    margin-right: min(2vw, 2vh);
+    transition: all ease-in-out 0.2s;
+}
+#home:hover {
+    border: 0pt solid #FFF;
+    transform: scale(1.2);
+}
+#toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out 0.2s;
+    width: min(5vw, 5vh);
+    height: min(5vw, 5vh);
+    font-size: min(3vw, 3vh);
+    background-color: #00000000;
+    border: 2pt solid #FFF;
+    color: #FFF;
+    border-radius: 10pt;
+    margin-left: min(2vw, 2vh);
+    margin-right: min(2vw, 2vh);
+}
+#toggleButton.closed {
+    transform: rotate(180deg);
+}
+#toggleButton:hover {
+    border: 0pt solid #FFF;
+}
+
+#main-content {
+    transition: all ease-in-out 0.3s;
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.left-pane {
+    transition: all ease-in-out 0.3s;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 5pt solid #888;
+}
+.left-pane.expanded {
+    width: 100%;
+    border-right: 0pt solid #888;
+}
+
+.right-pane {
+    transition: all ease-in-out 0.3s;
+    width: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-left: 5pt solid #888;
+}
+.right-pane.closed {
+    width: 0%;
+    overflow: hidden;
+    border-left: 0pt solid #888;
+}
+
+.actions-pane {
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.drop-zone {
+    margin: 10pt;
+    width: 40%;
+    height: 20vh;
+    border: 10pt solid lightblue;
+    border-radius: 20pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #555;
+    font-size: 1.5em;
+    transition: background-color 0.2s;
+}
+
+.drop-zone.dragover {
+    background-color: #e0e0e0;
+    border: 10pt dashed darkblue;
+}
+
+.blank-presentation {
+    margin: 10pt;
+    width: 40%;
+    height: 20vh;
+    border: 10pt solid darkgreen;
+    border-radius: 20pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #555;
+    font-size: 1.5em;
+    transition: all ease-in-out 0.5s;
+}
+
+.blank-presentation:hover {
+    background-color: darkgreen;
+    border: 10pt solid green;
+    color: #FFFFFF;
+}
+
+
+
+.compileButton {
+    transition: all ease-in-out 0.2s;
+    padding: 1vw;
+    margin: 4vh;
+    font-size: min(3vw, 3vh);
+    border: 3pt solid #FFF;
+    border-radius: 10pt;
+}
+.compileButton:hover {
+    transform: scale(1.5);
+    border: 0pt solid #FFF;
+}
+
+.download-button {
+    display: inline-block;
+    margin: 5vw;
+    padding: 5% 5%;
+    background: #333;
+    color: white;
+    border-radius: 10pt;
+    text-decoration: none;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+}
+
+.download-button:hover {
+    transform: scale(1.2);
+    background: #555;
+}
+
+.edit-button {
+    display: inline-block;
+    margin: 5vw;
+    padding: 5% 5%;
+    background: #2596be;
+    color: white;
+    border-radius: 10pt;
+    text-decoration: none;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+}
+
+.edit-button:hover {
+    transform: scale(1.2);
+    background: #1c7595;
+}
+
+.editor {
+    width: 90%;
+    height: 90%;
+    font-family: Arial, sans-serif;
+    font-size: 2em;
+    color: #FFFFFF;
+    background-color: #222222;
+    padding: 1em;
+    margin: 1em;
+}
