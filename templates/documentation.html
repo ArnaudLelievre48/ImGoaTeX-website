@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImGoaTeX Compiler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <header id="header">
+        <div class="left-bar">
+            <button id="home" onclick="window.location.href='/'">🏠</button>
+        </div>
+        <div class="center-bar">
+            <h1>ImGoaTeX - Improved Graphics and Objectivly more Accessible than TeX</h1>
+        </div>
+        <div class="right-bar">
+        </div>
+    </header>
+    <main id="main-content" class="mainContentDocumentation">
+        <h1>📖 ImGoaTeX Documentation</h1>
+        <div class="documentation">
+            <section>
+                <h2>Metadata</h2>
+                <p>Metadata are an essential part of an ImGoaTeX presentation, they define elements such as title, subtitle, and author of the presentation, which are not optionnal.</p>
+                <p>They also provide the ability to set optionnal options such as date, aspect ratio, colors and default font size.</p>
+                <pre><code>
+# Obligatory Metadatas
+
+%title: My presentation
+%subtitle: Optional subtitle
+%author: Your Name
+
+# Optionnal Metadatas
+
+%date: 29-08-2004
+%as_w: 4
+%as_h: 3
+%bgcolor: #FAFBFFFF
+%color1: #1D3DB1FF
+%color2: #152C80FF
+%color3: #6983DFFF
+%color4: #070E29FF
+%basefontsize: 1.5
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Sections and Subsections</h2>
+                <p>Sections and Subsections are necessary to a presentation. Each frame needs to be inside a subsection, and each subsection needs to be inside a section</p>
+                <pre><code>
+\section{Section title}
+\subsection{Subsection title}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Frames</h2>
+                <p>Frames are the heart of the presentation, they are the slides. They need to have a title, and can optionnaly have a subtitle. Frames can also have options and animations (explained after)</p>
+                <pre><code>
+\begin{frame}{Frame title}{Optionnal Frame Subtitle}
+    ...
+    ...
+    ...
+\end{frame}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Frame Options</h2>
+                <p>Frame can optionnaly be given the options : align = [center, top, bottom, left, right, top-left, left-top, top-right, right-top...]</p>
+                <p>Frame can also optionnaly be given animations ("In" animations and "Out") : MoveLeft, MoveRight, MoveTop, MoveBottom, Zoom, Rotate, None</p>
+                <pre><code>
+\begin{frame}{Title}[align=center]&lt;ZoomIn, MoveTopOut&gt;
+    ...
+    # Animated frame with the content centered
+    ...
+\end{frame}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Equations</h2>
+                <p>Equations are LaTeX's code inside $$ or $$...$$ like in regular LaTeX</p>
+                <pre><code>
+$\int_{\mathbb{R}} e^{-x^2} dx = \sqrt{\pi}$
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Pauses</h2>
+                <p>Pauses allows to have multiple states of a frame separated by pauses. Thesehave by default the animation : None (&lt;NoneIn, NoneOut&gt;), but can be given animations the same way frame get theirs</p>
+                <pre><code>
+\begin{frame}{Title}[align=center]
+    ...
+    ...
+    \pause
+    ...
+    ...
+    \pause&lt;MoveRightIn&gt;
+    ...
+    ...
+\end{frame}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Images</h2>
+                <p>Images are a piece of media, they can be gif, png, jpg... but they need to be placed inside the "medias" folder. Images can have non-necessary options : position, size, rotate, shift</p>
+                <pre><code>
+\image{figure.png}[position=top-left, size==, shift=10+5+12+4, rotate=-10]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Videos</h2>
+                <p>Videos are a piece of media, they thus also need to be in "medias", and can have the same options as  images</p>
+                <pre><code>
+\video{demo.mp4}[position=right-bottom, size=3]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Textbox</h2>
+                <p>Textbox can have the same options as images and video, but can also have the option : fontsize</p>
+                <pre><code>
+\textbox{Hi ! I am coding with ImGoaTeX}[position=left, shift=10+0+0+0, fontsize=2]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Iframe</h2>
+                <p>Iframe can have the same options as images and video, but can also have the option, but they also need a link</p>
+                <p>WARNING : some website do not support iframe, and having an iframe will need you to have an internet connexion in order to have the website showing</p>
+                <pre><code>
+\iframe{https://docs.google.com/spreadsheets/d/e/2PACX-1vSZTHvJ0v4zfKEgXnaJE9uOrBxA_G3s4HqdSXxLnRaVgUaI4zpR5t4--YcFkCfNkmGTHR6fAtay6tEW/pubhtml}[size=2, position=left-bottom]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>CodeBlocks</h2>
+                <p>CodeBlocks can have the same options as images and video, but can also have the option, as well as the language option (will be auto-detected otherwise). The source code needs to be in the "medias" folder"</p>
+                <pre><code>
+\codeblock{main.py}[language=python, size=1]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>CodeLine</h2>
+                <p>CodeLines displays a single line of code, the language is auto-detected by default, but can be forced by using the option language</p>
+                <pre><code>
+\codeline{ MyList = [i for i in range(0,10)] }[language=python]
+                </code></pre>
+            </section>
+            <div class="documentation-span">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <small>© {{ 2025 }} ImGoaTeX</small>
+    </footer>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
