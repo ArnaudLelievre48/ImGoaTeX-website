@@ -46,8 +46,13 @@ def get_upload_paths(folder):
 # --------------------------------------------------
 
 @app.route("/")
+def home():
+    return render_template("home.html")
+
+@app.route("/imgoatex")
 def index():
     return render_template("main.html")
+
 
 
 # --------------------

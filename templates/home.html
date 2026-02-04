@@ -16,20 +16,20 @@
             <h1>ImGoaTeX - Improved Graphics and Objectivly more Accessible than TeX</h1>
         </div>
         <div class="right-bar">
-            <button id="toggleButton">></button>
         </div>
     </header>
-    <main id="main-content" class="mainContent">
-        <div class="left-pane">
-            <div id="dropZone" class="drop-zone">
-                Drop your ".igtex" file here
+    <main id="main-content" class="mainContentHome">
+        <img onclick="window.location.href='https://github.com/ArnaudLelievre48/ImGoaTeX'" class="logoWide" src="{{ url_for('static', filename='ImGoaTeX.png') }}"></img>
+        <div class="mainOptions">
+            <div class="optionField">
+                <a class="option" href="/documentation" title="Documentation">📚</a>
+                <p>Documentation</p>
             </div>
-            <div id="blankPresentation" class="blank-presentation">
-                Blank presentation
+            <div class="optionField">
+                <a class="option" href="/imgoatex" title="TryOutImGoaTeX"> 👨‍💻</a>
+                <p>Try ImGoaTeX out !</p>
             </div>
-        </div>
-        <div class="right-pane">
-            <p>Here will be displayed the preview !</p>
+
         </div>
     </main>
 
