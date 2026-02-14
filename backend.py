@@ -53,6 +53,11 @@ def home():
 def index():
     return render_template("main.html")
 
+@app.route("/documentation")
+def documentation():
+    return render_template("documentation.html")
+
+
 
 
 # --------------------

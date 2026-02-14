@@ -25,7 +25,12 @@ footer {
     width: 20%;
 }
 .center-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width: 60%;
+    text-align: center;
 }
 .right-bar {
     width: 20%;
@@ -90,6 +95,36 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: start;
+}
+.mainContentDocumentation {
+    transition: all ease-in-out 0.3s;
+    height: 85vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow: scroll;
+}
+.documentation {
+    width: 80vw;
+    height: 100%;
+}
+.documentation-span {
+    height: 2vw;
+}
+pre {
+    width: 60%;
+    color: white;
+    background-color: #222222;
+    padding: 0.5em;
+    border-radius: 1em;
+    margin-left: 5%;
+    font-size: 1vw;
+    overflow: scroll;
+}
+section {
+    margin: 5em;
 }
 .logoWide {
     transition: all ease-in-out 0.2s;
