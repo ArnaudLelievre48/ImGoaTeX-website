@@ -1,4 +1,4 @@
- const blank_presentation_template = String.raw`%title: My presentation's title
+const blank_presentation_template = String.raw`%title: My presentation's title
 %subtitle: My presentation's subtitle
 %author: Arnaud Lelièvre
         
@@ -252,6 +252,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const textarea = document.createElement("textarea");
         textarea.className = "editor";
         textarea.placeholder = "Loading document…";
+        textarea.addEventListener("keydown", (e) => {
+            if (e.key == "Tab") {
+                e.preventDefault();
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const spaces = "    "; // 4 spaces
+                textarea.value = textarea.value.slice(0, start) + spaces + textarea.value.slice(end);
+                textarea.selectionStart = textarea.selectionEnd = start + spaces.length;
+                textarea.dispatchEvent(new Event("input"));
+                return; // do nothing
+            }
+        });
         leftPane.appendChild(textarea);
 
         const actionsPane = document.createElement("div");
@@ -276,6 +288,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         compileBtn.addEventListener("click", () => {
             compileFromEditor(textarea.value, mediaFiles);
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "F5") {
+                e.preventDefault(); // prevent browser refresh
+
+                const btn = document.querySelector(".compileButton"); // your button class
+                if (btn) btn.click(); // simulate click
+            }
         });
     }
 
@@ -308,6 +328,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --------------------
+    // Spawns popup for errors
+    // --------------------
+    function showPopup(message, duration = 3000) {
+        const overlay = document.createElement("div");
+        overlay.className = "popup-overlay";
+
+        const box = document.createElement("div");
+        box.className = "popup-box";
+
+        // Convert line breaks to <br>
+        box.innerHTML = message.replace(/\n/g, "<br>");
+
+        overlay.appendChild(box);
+        document.body.appendChild(overlay);
+
+        setTimeout(() => overlay.remove(), duration);
+
+        overlay.addEventListener("click", () => overlay.remove());
+    }
+
+
+
+    // --------------------
     // Compile edited source
     // --------------------
     async function compileFromEditor(source, mediaFiles) {
@@ -331,7 +374,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             const result = await res.json();
-            if (result.error) return alert(result.error);
+            if (result.error) {
+                showPopup(result.error)
+                return;
+                return alert(result.error);
+            }
 
             displayIframe(result.path);
             spawnButtons(result.path);

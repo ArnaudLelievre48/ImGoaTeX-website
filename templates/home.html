@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <canvas id="bg"></canvas>
     <header id="header">
         <div class="left-bar">
             <button id="home" onclick="window.location.href='/'">🏠</button>
@@ -19,15 +20,19 @@
         </div>
     </header>
     <main id="main-content" class="mainContentHome">
-        <img onclick="window.location.href='https://github.com/ArnaudLelievre48/ImGoaTeX'" class="logoWide" src="{{ url_for('static', filename='ImGoaTeX.png') }}"></img>
+        <img onclick="window.location.href='https://github.com/ArnaudLelievre48/ImGoaTeX'" class="logoWide" src="{{ url_for('static', filename='ImGoaTeX-white.png') }}"></img>
+        <div class="description">
+            <p class="description1">The familiarity of good old LaTeX</p>
+            <p class="description2">But with today's features</p>
+        </div>
         <div class="mainOptions">
             <div class="optionField">
-                <a class="option" href="/documentation" title="Documentation">📚</a>
-                <p>Documentation</p>
+                <a class="option" href="/documentation" title="Documentation"><p>📚 Documentation</p></a>
+                
             </div>
             <div class="optionField">
-                <a class="option" href="/imgoatex" title="TryOutImGoaTeX"> 👨‍💻</a>
-                <p>Try ImGoaTeX out !</p>
+                <a class="option" href="/imgoatex" title="TryOutImGoaTeX"><p> 👨‍💻 Try ImGoaTeX out !</p></a>
+                
             </div>
 
         </div>
@@ -38,6 +43,7 @@
     </footer>
 
     <!-- JS -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script-bg.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 </html>
