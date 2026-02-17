@@ -66,7 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const res = await fetch("/upload", { method: "POST", body: formData });
             const data = await res.json();
-            if (data.error) return alert(data.error);
+            if (data.error) {
+                showPopup(data.error);
+                return ;
+                /* return alert(data.error); */
+            }
 
             currentFolder = data.folder;
             currentRequiredMedia = data.media.map(m => m[1]);
@@ -75,7 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (err) {
             console.error(err);
-            alert("Upload failed");
+            showPopup("Upload failed");
+            /* alert("Upload failed"); */
         }
     });
 
@@ -128,7 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
         compileBtn.addEventListener("click", async () => {
             const missing = currentRequiredMedia.filter(m => !mediaFiles.has(m));
             if (missing.length > 0) {
-                alert("Missing media files: " + missing.join(", "));
+                showPopup("Missing media files: " + missing.join(", "));
+                /* alert("Missing media files: " + missing.join(", ")); */
                 return;
             }
 
@@ -142,14 +148,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 const result = await res.json();
-                if (result.error) return alert(result.error);
+                if (result.error) {
+                    showPopup(result.error);
+                    return;
+                    /* return alert(result.error); */
+                }
 
                 displayIframe(result.path);
                 spawnButtons(result.path);
 
             } catch (err) {
                 console.error(err);
-                alert("Compilation failed");
+                showPopup("Compilation failed");
+                /* alert("Compilation failed"); */
             }
         });
     }
@@ -169,7 +180,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: formData
             });
             const uploadData = await uploadRes.json();
-            if (uploadData.error) return alert(uploadData.error);
+            if (uploadData.error) {
+                showPopup(uploadData.error);
+                return;
+                /* return alert(uploadData.error); */
+            }
 
             currentFolder = uploadData.folder;
             currentRequiredMedia = uploadData.media.map(m => m[1]);
@@ -180,7 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 body: new FormData()
             });
             const compileData = await compileRes.json();
-            if (compileData.error) return alert(compileData.error);
+            if (compileData.error) {
+                showPopup(compileData.error);
+                return;
+                /* return alert(compileData.error); */
+            }
 
             // 4. Show preview
             displayIframe(compileData.path);
@@ -193,8 +212,9 @@ document.addEventListener("DOMContentLoaded", () => {
             openEditor();
 
         } catch (err) {
+            showPopup("Failed to create blank presentation");
             console.error(err);
-            alert("Failed to create blank presentation");
+            /* alert("Failed to create blank presentation"); */
         }
     }
 
@@ -356,7 +376,8 @@ document.addEventListener("DOMContentLoaded", () => {
     async function compileFromEditor(source, mediaFiles) {
         const missing = currentRequiredMedia.filter(m => !mediaFiles.has(m));
         if (missing.length > 0) {
-            alert("Missing media files: " + missing.join(", "));
+            showPopup("Missing media files: " + missing.join(", "))
+            /* alert("Missing media files: " + missing.join(", ")); */
             return;
         }
 
@@ -375,9 +396,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await res.json();
             if (result.error) {
-                showPopup(result.error)
+                showPopup(result.error);
                 return;
-                return alert(result.error);
+                /* return alert(result.error); */
             }
 
             displayIframe(result.path);
@@ -385,7 +406,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (err) {
             console.error(err);
-            alert("Compilation failed");
+            showPopup("Compilation failed");
+            /* alert("Compilation failed"); */
         }
     }
 
