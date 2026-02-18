@@ -71,6 +71,9 @@ footer {
     width: 60%;
     text-align: center;
 }
+.center-bar h1 {
+    font-size: 1.5vw;
+}
 .right-bar {
     width: 20%;
     display: flex;
@@ -86,9 +89,9 @@ footer {
     height: min(5vw, 5vh);
     font-size: min(3vw, 3vh);
     background-color: #00000000;
-    border: 2pt solid #FFF;
+    border: 0.1vw solid #FFF;
     color: #FFF;
-    border-radius: 10pt;
+    border-radius: 0.5vw;
     margin-left: min(2vw, 2vh);
     margin-right: min(2vw, 2vh);
     transition: all ease-in-out 0.2s;
@@ -106,9 +109,9 @@ footer {
     height: min(5vw, 5vh);
     font-size: min(3vw, 3vh);
     background-color: #00000000;
-    border: 2pt solid #FFF;
+    border: 0.1vw solid #FFF;
     color: #FFF;
-    border-radius: 10pt;
+    border-radius: 0.5vw;
     margin-left: min(2vw, 2vh);
     margin-right: min(2vw, 2vh);
 }
@@ -212,10 +215,10 @@ section {
     padding-right: 1vw;
     padding-top: 1vh;
     padding-bottom: 1vh;
-    border-radius: 20pt;
+    border-radius: 1vw;
     text-shadow: 0 5pt 10pt rgba(0,0,0,0.3);
     text-decoration: none;
-    border: solid 1pt #cfdffa;
+    border: solid 0.05vw #cfdffa;
     box-shadow: 15pt 5pt 20pt #000;
 }
 .option:hover {
@@ -283,7 +286,7 @@ section {
     height: 30vh;
     width: 60%;
     border: 5pt solid lightblue;
-    border-radius: 20pt;
+    border-radius: 1vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -299,7 +302,7 @@ section {
     width: 20%;
     height: 30vh;
     border: 5pt solid lightblue;
-    border-radius: 20pt;
+    border-radius: 1vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -331,7 +334,7 @@ section {
     margin: 10pt;
     height: 10vh;
     border: 3pt solid darkgreen;
-    border-radius: 20pt;
+    border-radius: 1vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -364,7 +367,7 @@ section {
     padding: 1vw;
     margin: 4vh;
     font-size: min(3vw, 3vh);
-    border-radius: 10pt;
+    border-radius: 0.5vw;
     box-shadow: 15pt 5pt 20pt #000;
     background-color: #b1ccfc;
 }
@@ -381,7 +384,7 @@ section {
     padding: 5% 5%;
     background: #333;
     color: white;
-    border-radius: 10pt;
+    border-radius: 0.5vw;
     text-decoration: none;
     font-size: 3em;
     font-weight: bold;
@@ -401,7 +404,7 @@ section {
     padding: 5% 5%;
     background: #2596be;
     color: white;
-    border-radius: 10pt;
+    border-radius: 0.5vw;
     text-decoration: none;
     font-size: 3em;
     font-weight: bold;
