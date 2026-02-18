@@ -8,7 +8,8 @@ const blank_presentation_template = String.raw`%title: My presentation's title
 \begin{frame}{ImGoaTeX is great !}[align=center]<ZoomIn>
     This is a blank presentation.
     \pause
-    Happy coding with ImGoaTeX !
+    $\int_{0}^{+\infty} e^{-x^2} dx = \sqrt{\pi}$
+    \textbox{Happy coding with ImGoaTeX !}[position=right, rotate=90, fontsize=1.5, border, size=2]
 \end{frame}
 `
 
@@ -159,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             } catch (err) {
                 console.error(err);
-                showPopup("Compilation failed");
+                showPopup("Compilation failed : " + (err.error || JSON.stringify(err)));
                 /* alert("Compilation failed"); */
             }
         });
@@ -406,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (err) {
             console.error(err);
-            showPopup("Compilation failed");
+            showPopup("Compilation failed : " + (err.error || JSON.stringify(err)));
             /* alert("Compilation failed"); */
         }
     }

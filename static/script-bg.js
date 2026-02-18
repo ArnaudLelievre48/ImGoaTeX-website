@@ -26,7 +26,7 @@
     const vLineCount = window.innerWidth < 768 ? 10 : 12;
     const pointsPerLine = 100;
     const strength = 2.5;
-    const sigma = Math.exp(23);
+    const sigma = Math.exp(21.5);
     const timeSpeed = 0.001;
 
     // Precompute horizontal lines

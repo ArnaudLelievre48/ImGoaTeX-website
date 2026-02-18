@@ -1,7 +1,11 @@
 from flask import Flask, render_template, request, jsonify, url_for
 import os, re, time, subprocess
+from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 50_000_000
+
 
 UPLOAD_FOLDER = "static/uploads"
 COMPILER_PATH = "/home/arnaud/Desktop/arnaud/code/python/ImGoaTeX/ImGoaTeX-compilor.py"
@@ -98,7 +102,17 @@ def upload_media(folder):
 
     # save media files
     for f in request.files.values():
-        f.save(os.path.join(paths["medias"], f.filename))
+        f.seek(0, os.SEEK_END)
+        size = f.tell()
+        f.seek(0)
+
+        filename = secure_filename(f.filename)
+        if filename == "":
+            return jsonify({"error": "Invalid filename"}), 400
+
+        if size > 30_000_000:
+            return jsonify({"error": "file too large (>30Mb)"}), 400
+        f.save(os.path.join(paths["medias"], filename))
 
     igtex = next(f for f in os.listdir(paths["base"]) if f.endswith(".igtex"))
     igtex_path = os.path.join(paths["base"], igtex)
@@ -144,7 +158,10 @@ def compile_edit():
     # save media again (optional)
     for key, f in request.files.items():
         if key not in ("source", "filename"):
-            f.save(os.path.join(paths["medias"], f.filename))
+            filename = secure_filename(f.filename)
+            if filename == "":
+                return jsonify({"error": "Invalid filename"}), 400
+            f.save(os.path.join(paths["medias"], filename))
 
     # re-check media
     required = [name for _, name in parse_media(igtex_path)]
