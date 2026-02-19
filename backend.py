@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify, url_for
 import os, re, time, subprocess
 from werkzeug.utils import secure_filename
-
+import logging
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50_000_000
@@ -9,9 +9,18 @@ app.config['MAX_CONTENT_LENGTH'] = 50_000_000
 
 UPLOAD_FOLDER = "static/uploads"
 COMPILER_PATH = "/home/arnaud/Desktop/arnaud/code/python/ImGoaTeX/ImGoaTeX-compilor.py"
+WEBSITE_PATH = "/home/arnaud/Desktop/arnaud/code/python/ImGoaTeX-website"
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+logging.basicConfig(filename=f"{WEBSITE_PATH}/logs/ip_requests.log",
+                    level=logging.INFO,
+                    format='%(asctime)s - %(message)s')
+
+@app.before_request
+def log_ip():
+    ip = request.remote_addr
+    app.logger.info(ip)
 
 # --------------------------------------------------
 # Utils
