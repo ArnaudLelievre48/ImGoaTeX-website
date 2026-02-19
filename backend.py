@@ -60,15 +60,33 @@ def get_upload_paths(folder):
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    user_agent = request.headers.get("User-Agent", "").lower()
+    mobile_keywords = ["iphone", "ipad", "android", "mobile", "blackberry", "phone"]
+    print(user_agent)
+    if any(keyword in user_agent for keyword in mobile_keywords):
+        return render_template("mobile_home.html")
+    else:
+        return render_template("home.html")
 
 @app.route("/imgoatex")
 def index():
-    return render_template("main.html")
+    user_agent = request.headers.get("User-Agent", "").lower()
+    mobile_keywords = ["iphone", "ipad", "android", "mobile", "blackberry", "phone"]
+    print(user_agent)
+    if any(keyword in user_agent for keyword in mobile_keywords):
+        return render_template("mobile_main.html")
+    else:
+        return render_template("main.html")
 
 @app.route("/documentation")
 def documentation():
-    return render_template("documentation.html")
+    user_agent = request.headers.get("User-Agent", "").lower()
+    mobile_keywords = ["iphone", "ipad", "android", "mobile", "blackberry", "phone"]
+    print(user_agent)
+    if any(keyword in user_agent for keyword in mobile_keywords):
+        return render_template("mobile_documentation.html")
+    else:
+        return render_template("documentation.html")
 
 
 
