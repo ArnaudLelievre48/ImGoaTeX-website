@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImGoaTeX Compiler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mobile_styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+    <header id="header">
+        <div class="left-bar">
+            <button id="home" onclick="window.location.href='/'">🏠</button>
+        </div>
+        <div class="center-bar">
+            <h1>ImGoaTeX - Improved Graphics and Objectivly more Accessible than TeX</h1>
+        </div>
+        <div class="right-bar">
+        </div>
+    </header>
+    <main id="main-content" class="mainContentDocumentation">
+        <h1>📖 ImGoaTeX Documentation</h1>
+        <div class="documentation">
+            <section>
+                <h2>Metadata</h2>
+                <p>Metadata are an essential part of an ImGoaTeX presentation, they define elements such as title, subtitle, and author of the presentation, which are not optional.</p>
+                <p>They also provide the ability to set optional options such as date, aspect ratio, colors and default font size.</p>
+                <pre><code>
+# Obligatory Metadata
+
+%title: My presentation
+%subtitle: Optional subtitle
+%author: Your Name
+
+# Optional Metadata
+
+%date: 29-08-2004 # auto-generated if not specified
+%as_w: 4
+%as_h: 3
+%bgcolor: #FAFBFFFF
+%color1: #1D3DB1FF
+%color2: #152C80FF
+%color3: #6983DFFF
+%color4: #070E29FF
+%basefontsize: 1.5
+%font: Arial
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Sections and Subsections</h2>
+                <p>Sections and Subsections are necessary to a presentation. Each frame needs to be inside a subsection, and each subsection needs to be inside a section</p>
+                <pre><code>
+\section{Section title}
+\subsection{Subsection title}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Frames</h2>
+                <p>Frames are the heart of the presentation, they are the slides. They need to have a title, and can optionaly have a subtitle. Frames can also have options and animations (explained after)</p>
+                <pre><code>
+\begin{frame}{Frame title}{Optionnal Frame Subtitle}
+    ...
+    ...
+    ...
+\end{frame}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Frame Options</h2>
+                <p>Frame can optionaly be given the options : align = [center, top, bottom, left, right, top-left, left-top, top-right, right-top...]</p>
+                <p>Frame can also optionaly be given animations ("In" animations and "Out") : MoveLeft, MoveRight, MoveTop, MoveBottom, Zoom, Rotate, None</p>
+                <details>
+                    <summary>List of supported Frame options</summary>
+
+                    <ul>
+                        <li><code>align=center</code></li>
+                        <li><code>align=top</code></li>
+                        <li><code>align=bottom</code></li>
+                        <li><code>align=left</code></li>
+                        <li><code>align=right</code></li>
+                        <li><code>align=top-left # or left-top</code></li>
+                        <li><code>align=top-right# or right-top</code></li>
+                        <li><code>align=bottom-left# or left-bottom</code></li>
+                        <li><code>align=bottom-right# or right-bottom</code></li>
+                    </ul>
+                </details>
+                <details>
+                    <summary>List of supported Frame animations</summary>
+                    <p>An animation can be for both "In" or "Out"</p>
+                    <p>The default animation is "Fade"</p>
+
+                    <ul>
+                        <li>Zoom : <code>&lt;ZoomIn&gt; # &lt;ZoomOut&gt;</code></li>
+                        <li>Rotate : <code>&lt;RotateIn&gt; # &lt;RotateOut&gt;</code></li>
+                        <li>Fade : <code>&lt;FadeIn&gt; # &lt;FadeOut&gt;</code></li>
+                        <li>None : <code>&lt;NoneIn&gt; # &lt;NoneOut&gt;</code></li>
+                        <li>MoveTop : <code>&lt;MoveTopIn&gt; # &lt;MoveTopOut&gt;</code></li>
+                        <li>MoveBottom : <code>&lt;MoveBottomIn&gt; # &lt;MoveBottomOut&gt;</code></li>
+                        <li>MoveLeft : <code>&lt;MoveLeftIn&gt; # &lt;MoveLeftOut&gt;</code></li>
+                        <li>MoveRight : <code>&lt;MoveRightIn&gt; # &lt;MoveRightOut&gt;</code></li>
+                    </ul>
+                </details>
+
+                <pre><code>
+\begin{frame}{Title}[align=center]&lt;ZoomIn, MoveTopOut&gt;
+    ...
+    # Animated frame with the content centered
+    ...
+\end{frame}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Equations</h2>
+                <p>Equations are LaTeX's code inside $$ or $$...$$ like in regular LaTeX</p>
+                <pre><code>
+$\int_{\mathbb{R}} e^{-x^2} dx = \sqrt{\pi}$
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Pauses</h2>
+                <p>Pauses allows to have multiple states of a frame separated by pauses. Thesehave by default the animation : None (&lt;NoneIn, NoneOut&gt;), but can be given animations the same way frame get theirs</p>
+                <details>
+                    <summary>List of supported Pause animations (same as Frame animations)</summary>
+                    <p>An animation can be for both "In" or "Out"</p>
+                    <p>The default animation is "Fade"</p>
+
+                    <ul>
+                        <li>Zoom : <code>&lt;ZoomIn&gt; # &lt;ZoomOut&gt;</code></li>
+                        <li>Rotate : <code>&lt;RotateIn&gt; # &lt;RotateOut&gt;</code></li>
+                        <li>Fade : <code>&lt;FadeIn&gt; # &lt;FadeOut&gt;</code></li>
+                        <li>None : <code>&lt;NoneIn&gt; # &lt;NoneOut&gt;</code></li>
+                        <li>MoveTop : <code>&lt;MoveTopIn&gt; # &lt;MoveTopOut&gt;</code></li>
+                        <li>MoveBottom : <code>&lt;MoveBottomIn&gt; # &lt;MoveBottomOut&gt;</code></li>
+                        <li>MoveLeft : <code>&lt;MoveLeftIn&gt; # &lt;MoveLeftOut&gt;</code></li>
+                        <li>MoveRight : <code>&lt;MoveRightIn&gt; # &lt;MoveRightOut&gt;</code></li>
+                    </ul>
+                </details>
+
+
+                <pre><code>
+\begin{frame}{Title}[align=center]
+    ...
+    ...
+    \pause
+    ...
+    ...
+    \pause&lt;MoveRightIn&gt;
+    ...
+    ...
+\end{frame}
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Images</h2>
+                <p>Images are a piece of media, they can be gif, png, jpg... but they need to be placed inside the "medias" folder. Images can have non-necessary options : position, size, rotate, shift</p>
+                <details>
+                    <summary>List of supported Image options</summary>
+
+                    <p>position</p>
+                    <ul>
+                        <li><code>position=center</code></li>
+                        <li><code>position=top</code></li>
+                        <li><code>position=bottom</code></li>
+                        <li><code>position=left</code></li>
+                        <li><code>position=right</code></li>
+                        <li><code>position=top-left # or left-top</code></li>
+                        <li><code>position=top-right# or right-top</code></li>
+                        <li><code>position=bottom-left# or left-bottom</code></li>
+                        <li><code>position=bottom-right# or right-bottom</code></li>
+                    </ul>
+                    <p>shift</p>
+                    <p>values are given in <code>unit_x</code> and <code>unit_y</code>, where <code>100 unit_x</code> is the whole width of a slide (the same goes for <code>unit_y</code>)</p>
+                    <ul>
+                        <li><code>shift = {top}+{right}+{bottom}+{left}</code></li>
+                    </ul>
+                    <p>rotate</p>
+                    <ul>
+                        <li><code>rotate={degres}</code></li>
+                    </ul>
+                    <p>size</p>
+                    <p>size controle the width of the media</p>
+                    <ul>
+                        <li><code>size=1 # big</code></li>
+                        <li><code>size=2</code></li>
+                        <li><code>size=3</code></li>
+                        <li><code>size=4 # very small</code></li>
+                    </ul>
+                </details>
+
+                <pre><code>
+\image{figure.png}[position=top-left, size==, shift=10+5+12+4, rotate=-10]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Videos</h2>
+                <p>Videos are a piece of media, they thus also need to be in "medias", and can have the same options as images</p>
+                <details>
+                    <summary>List of supported Video options (same as Images options)</summary>
+
+                    <p>position</p>
+                    <ul>
+                        <li><code>position=center</code></li>
+                        <li><code>position=top</code></li>
+                        <li><code>position=bottom</code></li>
+                        <li><code>position=left</code></li>
+                        <li><code>position=right</code></li>
+                        <li><code>position=top-left # or left-top</code></li>
+                        <li><code>position=top-right# or right-top</code></li>
+                        <li><code>position=bottom-left# or left-bottom</code></li>
+                        <li><code>position=bottom-right# or right-bottom</code></li>
+                    </ul>
+                    <p>shift</p>
+                    <p>values are given in <code>unit_x</code> and <code>unit_y</code>, where <code>100 unit_x</code> is the whole width of a slide (the same goes for <code>unit_y</code>)</p>
+                    <ul>
+                        <li><code>shift = {top}+{right}+{bottom}+{left}</code></li>
+                    </ul>
+                    <p>rotate</p>
+                    <ul>
+                        <li><code>rotate={degres}</code></li>
+                    </ul>
+                    <p>size</p>
+                    <p>size controle the width of the media</p>
+                    <ul>
+                        <li><code>size=1 # big</code></li>
+                        <li><code>size=2</code></li>
+                        <li><code>size=3</code></li>
+                        <li><code>size=4 # very small</code></li>
+                    </ul>
+                </details>
+                <pre><code>
+\video{demo.mp4}[position=right-bottom, size=3]
+                </code></pre>
+            </section>
+
+           <section>
+                <h2>Iframe</h2>
+                <p>Iframe can have the same options as images and video, but can also have the option, but they also need a link</p>
+                <p>WARNING : some websites do not support iframe, and having an iframe will need you to have an internet connection in order to have the website showing</p>
+                <details>
+                    <summary>List of supported Iframe options (same as Images options)</summary>
+
+                    <p>position</p>
+                    <ul>
+                        <li><code>position=center</code></li>
+                        <li><code>position=top</code></li>
+                        <li><code>position=bottom</code></li>
+                        <li><code>position=left</code></li>
+                        <li><code>position=right</code></li>
+                        <li><code>position=top-left # or left-top</code></li>
+                        <li><code>position=top-right# or right-top</code></li>
+                        <li><code>position=bottom-left# or left-bottom</code></li>
+                        <li><code>position=bottom-right# or right-bottom</code></li>
+                    </ul>
+                    <p>shift</p>
+                    <p>values are given in <code>unit_x</code> and <code>unit_y</code>, where <code>100 unit_x</code> is the whole width of a slide (the same goes for <code>unit_y</code>)</p>
+                    <ul>
+                        <li><code>shift = {top}+{right}+{bottom}+{left}</code></li>
+                    </ul>
+                    <p>rotate</p>
+                    <ul>
+                        <li><code>rotate={degres}</code></li>
+                    </ul>
+                    <p>size</p>
+                    <p>size controle the width of the media</p>
+                    <ul>
+                        <li><code>size=1 # big</code></li>
+                        <li><code>size=2</code></li>
+                        <li><code>size=3</code></li>
+                        <li><code>size=4 # very small</code></li>
+                    </ul>
+                </details>
+                <pre><code>
+\iframe{https://docs.google.com/spreadsheets/d/e/2PACX-1vSZTHvJ0v4zfKEgXnaJE9uOrBxA_G3s4HqdSXxLnRaVgUaI4zpR5t4--YcFkCfNkmGTHR6fAtay6tEW/pubhtml}[size=2, position=left-bottom]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>TextBox</h2>
+                <p>TextBoxes can have the same options as images and video, but can also have the options fontsize and border</p>
+                <details>
+                    <summary>List of supported TextBox options (same as Images options)</summary>
+
+                    <p>position</p>
+                    <ul>
+                        <li><code>position=center</code></li>
+                        <li><code>position=top</code></li>
+                        <li><code>position=bottom</code></li>
+                        <li><code>position=left</code></li>
+                        <li><code>position=right</code></li>
+                        <li><code>position=top-left # or left-top</code></li>
+                        <li><code>position=top-right# or right-top</code></li>
+                        <li><code>position=bottom-left# or left-bottom</code></li>
+                        <li><code>position=bottom-right# or right-bottom</code></li>
+                    </ul>
+                    <p>shift</p>
+                    <p>values are given in <code>unit_x</code> and <code>unit_y</code>, where <code>100 unit_x</code> is the whole width of a slide (the same goes for <code>unit_y</code>)</p>
+                    <ul>
+                        <li><code>shift = {top}+{right}+{bottom}+{left}</code></li>
+                    </ul>
+                    <p>rotate</p>
+                    <ul>
+                        <li><code>rotate={degres}</code></li>
+                    </ul>
+                    <p>size</p>
+                    <p>size controle the width of the textbox</p>
+                    <ul>
+                        <li><code>size=1 # big</code></li>
+                        <li><code>size=2</code></li>
+                        <li><code>size=3</code></li>
+                        <li><code>size=4 # very small</code></li>
+                    </ul>
+                    <p>fontsize</p>
+                    <ul>
+                        <li><code>fontsize = {float}</code></li>
+                    </ul>
+                    <p>border</p>
+                    <ul>
+                        <li><code>border</code></li>
+                    </ul>
+                </details>
+
+                <pre><code>
+\textbox{Hi ! I am coding with ImGoaTeX}[position=left, shift=10+0+0+0, fontsize=2]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>CodeBlocks</h2>
+                <p>CodeBlocks can have the same options as images and video, but can also have the option, as well as the language option (will be auto-detected otherwise). The source code needs to be in the "medias" folder"</p>
+                <details>
+                    <summary>List of supported CodeBlock options</summary>
+
+                    <p>position</p>
+                    <ul>
+                        <li><code>position=center</code></li>
+                        <li><code>position=top</code></li>
+                        <li><code>position=bottom</code></li>
+                        <li><code>position=left</code></li>
+                        <li><code>position=right</code></li>
+                        <li><code>position=top-left # or left-top</code></li>
+                        <li><code>position=top-right# or right-top</code></li>
+                        <li><code>position=bottom-left# or left-bottom</code></li>
+                        <li><code>position=bottom-right# or right-bottom</code></li>
+                    </ul>
+                    <p>shift</p>
+                    <p>values are given in <code>unit_x</code> and <code>unit_y</code>, where <code>100 unit_x</code> is the whole width of a slide (the same goes for <code>unit_y</code>)</p>
+                    <ul>
+                        <li><code>shift = {top}+{right}+{bottom}+{left}</code></li>
+                    </ul>
+                    <p>rotate</p>
+                    <ul>
+                        <li><code>rotate={degres}</code></li>
+                    </ul>
+                    <p>size</p>
+                    <p>size controle the width of the media</p>
+                    <ul>
+                        <li><code>size=1 # big</code></li>
+                        <li><code>size=2</code></li>
+                        <li><code>size=3</code></li>
+                        <li><code>size=4 # very small</code></li>
+                    </ul>
+                    <p>language</p>
+                    <p>no language defined => the language is being guess</p>
+                    <ul>
+                        <li><code>language = {language}</code></li>
+                    </ul>
+                </details>
+                <pre><code>
+\codeblock{main.py}[language=python, size=1]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>CodeLine</h2>
+                <p>CodeLines displays a single line of code, the language is auto-detected by default, but can be forced by using the option language</p>
+                <details>
+                    <summary>List of supported CodeLine options</summary>
+
+                    <p>language</p>
+                    <p>no language defined => the language is being guess</p>
+                    <ul>
+                        <li><code>language = {language}</code></li>
+                    </ul>
+                </details>
+
+                <pre><code>
+\codeline{ MyList = [i for i in range(0,10)] }[language=python]
+                </code></pre>
+            </section>
+
+            <section>
+                <h2>Comments</h2>
+                <p>Commented lines</p>
+                <pre><code>
+# This is a commented out line
+                </code></pre>
+            </section>
+
+            <div class="documentation-span">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <small>© {{ 2025 }} ImGoaTeX</small>
+    </footer>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='mobile_script.js') }}"></script>
+</body>
+</html>

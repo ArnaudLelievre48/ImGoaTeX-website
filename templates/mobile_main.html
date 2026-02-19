@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImGoaTeX Compiler</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mobile_styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
+</head>
+
+<body>
+    <header id="header">
+        <div class="left-bar">
+            <button id="home" onclick="window.location.href='/'">🏠</button>
+        </div>
+        <div class="center-bar">
+            <h1>ImGoaTeX - Improved Graphics and Objectivly more Accessible than TeX</h1>
+        </div>
+        <div class="right-bar">
+        </div>
+    </header>
+    <main id="main-content" class="mainContent">
+        <div class="description">
+            <p class="description2">Sorry, ImGoaTeX is not designed for mobiles 🙁</p>
+            <p class="description1">💻 Try it out on your laptop though !</p>
+        </div>
+    </main>
+
+    <footer>
+        <small>© {{ 2025 }} ImGoaTeX</small>
+    </footer>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='mobile_script.js') }}"></script>
+</body>
+</html>
