@@ -302,6 +302,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const mediaFiles = new Map();
         spawnEditorMediaZone(mediaFiles, actionsPane);
 
+        const saveBtn = document.createElement("button");
+        saveBtn.innerText = "Save [F5]";
+        saveBtn.classList.add("saveButton");
+        actionsPane.appendChild(saveBtn);
+
+        saveBtn.addEventListener("click", () => {
+            compileFromEditor(textarea.value, mediaFiles, true);
+        });
+
+
         const compileBtn = document.createElement("button");
         compileBtn.innerText = "Compile";
         compileBtn.classList.add("compileButton");
@@ -310,12 +320,11 @@ document.addEventListener("DOMContentLoaded", () => {
         compileBtn.addEventListener("click", () => {
             compileFromEditor(textarea.value, mediaFiles);
         });
+
         document.addEventListener("keydown", (e) => {
             if (e.key === "F5") {
                 e.preventDefault(); // prevent browser refresh
-
-                const btn = document.querySelector(".compileButton"); // your button class
-                if (btn) btn.click(); // simulate click
+                compileFromEditor(textarea.value, mediaFiles, true);
             }
         });
     }
@@ -374,11 +383,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // --------------------
     // Compile edited source
     // --------------------
-    async function compileFromEditor(source, mediaFiles) {
+    async function compileFromEditor(source, mediaFiles, isRefreshOnly = false) {
         const missing = currentRequiredMedia.filter(m => !mediaFiles.has(m));
         if (missing.length > 0) {
-            showPopup("Missing media files: " + missing.join(", "))
-            /* alert("Missing media files: " + missing.join(", ")); */
+            showPopup("Missing media files: " + missing.join(", "));
             return;
         }
 
@@ -386,7 +394,6 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("source", source);
         formData.append("filename", currentFilename);
         formData.append("folder", currentFolder);
-
         mediaFiles.forEach(file => formData.append(file.name, file));
 
         try {
@@ -399,16 +406,29 @@ document.addEventListener("DOMContentLoaded", () => {
             if (result.error) {
                 showPopup(result.error);
                 return;
-                /* return alert(result.error); */
             }
 
+            // 1. Always update the iframe
             displayIframe(result.path);
-            spawnButtons(result.path);
+
+            // 2. Conditional UI Transition
+            if (isRefreshOnly) {
+                // Ensure the right pane is visible for the refresh
+                if (rightPane.classList.contains("closed")) {
+                    rightPane.classList.remove("closed");
+                    toggleBtn.classList.remove("closed");
+                    leftPane.classList.remove("expanded");
+                }
+                // Logic: Stay in editor. We don't call spawnButtons() here.
+                console.log("Quick refresh complete.");
+            } else {
+                // Normal "Compile" button behavior: Switch to Download/Edit view
+                spawnButtons(result.path);
+            }
 
         } catch (err) {
             console.error(err);
             showPopup("Compilation failed : " + (err.error || JSON.stringify(err)));
-            /* alert("Compilation failed"); */
         }
     }
 
