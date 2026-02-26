@@ -292,7 +292,7 @@ section {
     justify-content: center;
     flex-direction: column;
     color: #555;
-    font-size: 1.5em;
+    font-size: min(2vw, 2vh);
     transition: background-color 0.2s;
 }
 .left-pane.expanded .drop-zone {
@@ -308,7 +308,7 @@ section {
     justify-content: center;
     flex-direction: column;
     color: #555;
-    font-size: 1.5em;
+    font-size: min(2.2vw, 2.2vh);
     transition: background-color 0.2s;
 }
 
@@ -422,7 +422,7 @@ section {
     width: 85%;
     height: 88%;
     font-family: "Space Mono", sans-serif;
-    font-size: 2em;
+    font-size: min(2vw, 2vh);
     color: #FFFFFF;
     background: #131821;
     padding: 1em;
