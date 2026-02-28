@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentBasepath = null;
     let currentFilename = null;
     let currentRequiredMedia = [];
+    const persistentMediaFiles = new Map();
 
     // --------------------
     // Pane toggle
@@ -332,7 +333,22 @@ document.addEventListener("DOMContentLoaded", () => {
     function spawnEditorMediaZone(mediaFiles, actionsPane) {
         const mediaDropZone = document.createElement("div");
         mediaDropZone.className = "drop-zone";
-        mediaDropZone.innerText = "Drop required media files here";
+        const updateZoneText = () => {
+            if (persistentMediaFiles.size > 0) {
+                const truncatedNames = [...persistentMediaFiles.keys()].map(name => {
+                    // If name is longer than 15 chars, truncate it
+                    if (name.length > 15) {
+                        return name.substring(0, 8) + "..." + name.slice(-5);
+                    }
+                    return name;
+                });
+
+                mediaDropZone.innerText = `Assets: ${truncatedNames.join(", ")}`;
+            } else {
+                mediaDropZone.innerText = "Drop media files here";
+            }
+        };
+        updateZoneText();
         actionsPane.appendChild(mediaDropZone);
 
         mediaDropZone.addEventListener("dragover", e => {
@@ -344,7 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
             mediaDropZone.classList.remove("dragover");
         });
 
-        mediaDropZone.addEventListener("drop", e => {
+        /* mediaDropZone.addEventListener("drop", e => {
             e.preventDefault();
             mediaDropZone.classList.remove("dragover");
 
@@ -354,6 +370,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             mediaDropZone.innerText =
                 `Files ready: ${[...mediaFiles.keys()].join(", ")}`;
+        }); */
+
+        mediaDropZone.addEventListener("drop", e => {
+            e.preventDefault();
+            mediaDropZone.classList.remove("dragover");
+
+            for (const file of e.dataTransfer.files) {
+                persistentMediaFiles.set(file.name, file); // Save to global store
+            }
+            updateZoneText();
         });
     }
 
@@ -387,7 +413,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const missing = currentRequiredMedia.filter(m => !mediaFiles.has(m));
         if (missing.length > 0) {
             showPopup("Missing media files: " + missing.join(", "));
-            return;
         }
 
         const formData = new FormData();
@@ -395,6 +420,10 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("filename", currentFilename);
         formData.append("folder", currentFolder);
         mediaFiles.forEach(file => formData.append(file.name, file));
+
+        persistentMediaFiles.forEach((file, name) => {
+            formData.append(name, file);
+        });
 
         try {
             const res = await fetch("/compile_edit", {
