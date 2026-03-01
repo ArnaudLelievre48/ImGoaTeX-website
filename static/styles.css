@@ -263,6 +263,7 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     border-left: 5pt solid #888;
 }
 .right-pane.closed {
@@ -270,6 +271,13 @@ section {
     overflow: hidden;
     border-left: 0pt solid #888;
 }
+.demo {
+    border-radius: 1vw;
+    border: solid 0.2vw #131821;
+    width: 90%;
+    filter: drop-shadow(0 0 0.5vw #000000) drop-shadow(0 0 1vw #00000080);
+}
+
 .actions-pane {
     width: 95%;
     height: 12.5%;
