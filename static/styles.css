@@ -5,6 +5,9 @@ body {
     background-color: #0b0f17;
     color: white;
 }
+html {
+    scroll-behavior: smooth;
+}
 #bg {
     position: fixed;
     top: 0;
@@ -172,21 +175,83 @@ footer {
     width: 80vw;
     height: 100%;
 }
+.documentation-menu {
+    position: fixed;
+    top: 50%;
+    right: 2vw;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 20vw;
+    max-height: calc(70vh);
+    overflow-y: auto;
+    padding: 0.5vw;
+    color: white;
+    background: rgba(19, 24, 33, 0.94);
+    border: solid 0.05vw #cfdffa;
+    border-radius: 1vw;
+    box-shadow: 15pt 5pt 20pt #000;
+    backdrop-filter: blur(8px);
+    transition: all ease-in-out 0.2s;
+}
+.documentation-menu:hover {
+    top: 47%;
+    transform: scale(1.1) translateY(-40%);
+    transition: all ease-in-out 0.2s;
+}
+.documentation-menu strong {
+    display: block;
+    margin-bottom: 0.5vh;
+    color: #cfdffa;
+    font-size: 1vw;
+    text-shadow: 0 5pt 10pt rgba(0,0,0,0.3);
+}
+.documentation-menu a {
+    display: block;
+    margin-bottom: 0.2vh;
+    padding: 0.1vw 0.15vw;
+    border-radius: 0.5vw;
+    color: white;
+    font-size: 0.8vw;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: all ease-in-out 0.2s;
+}
+.documentation-menu a:hover,
+.documentation-menu a:focus {
+    color: #cfdffa;
+    background: rgba(177, 204, 252, 0.08);
+    filter: drop-shadow(0 0 5px #cfdffa80);
+    outline: none;
+}
+.documentation section {
+    scroll-margin-top: 6rem;
+}
 .documentation-span {
     height: 2vw;
 }
 pre {
-    width: 60%;
+    width: 75%;
     color: white;
     background: #131821;
-    padding: 0.5em;
-    border-radius: 1em;
+    padding: 0.5vw;
+    border-radius: 0.3vw;
     margin-left: 5%;
     font-size: 1vw;
     overflow: scroll;
 }
 section {
-    margin: 5em;
+    margin: 3vw;
+}
+@media (min-width: 1200px) {
+    .mainContentDocumentation {
+        box-sizing: border-box;
+        padding-right: 260px;
+    }
+}
+@media (max-width: 1199px) {
+    .documentation-menu {
+        display: none;
+    }
 }
 .logoWide {
     transition: all ease-in-out 0.2s;

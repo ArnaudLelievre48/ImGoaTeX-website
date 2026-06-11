@@ -20,10 +20,30 @@
         </div>
     </header>
 
+    <nav class="documentation-menu" aria-label="Menu de la documentation">
+        <strong>Documentation</strong>
+        <a href="#principe-general">Principe general</a>
+        <a href="#compilation">Compilation</a>
+        <a href="#metadonnees">Metadonnees</a>
+        <a href="#sections-et-sous-sections">Sections et sous-sections</a>
+        <a href="#frames">Frames</a>
+        <a href="#animations">Animations</a>
+        <a href="#texte">Texte</a>
+        <a href="#equations">Equations</a>
+        <a href="#listes">Listes</a>
+        <a href="#pauses">Pauses</a>
+        <a href="#medias">Medias</a>
+        <a href="#textboxes">Textboxes</a>
+        <a href="#iframes">Iframes</a>
+        <a href="#code">Code</a>
+        <a href="#exemple-complet">Exemple complet</a>
+        <a href="#erreurs-frequentes">Erreurs frequentes</a>
+    </nav>
+
     <main id="main-content" class="mainContentDocumentation">
         <h1>📖 Documentation ImGoaTeX</h1>
         <div class="documentation">
-            <section>
+            <section id="principe-general">
                 <h2>Principe general</h2>
                 <p>ImGoaTeX est un langage de presentation inspire de Beamer. Un fichier <code>.igtex</code> est transforme en une presentation HTML, puis peut aussi etre exporte en PDF.</p>
                 <p>Le compileur lit le fichier ligne par ligne, ignore les lignes vides et les commentaires commençant par <code>#</code>, puis construit une presentation organisee en sections, sous-sections et frames.</p>
@@ -41,7 +61,7 @@ Deuxieme etape de la meme slide.
 \end{frame}</code></pre>
             </section>
 
-            <section>
+            <section id="compilation">
                 <h2>Compilation</h2>
                 <p>Le compileur prend un fichier source en argument. Par defaut, il produit <code>output.html</code> dans le dossier du fichier compile.</p>
                 <pre><code>python3 ImGoaTeX-compilor.py main.igtex
@@ -60,7 +80,7 @@ igtexc main.igtex -p</code></pre>
                 </details>
             </section>
 
-            <section>
+            <section id="metadonnees">
                 <h2>Metadonnees</h2>
                 <p>Les metadonnees se placent au debut du fichier avec la forme <code>%cle: valeur</code>. Le titre, le sous-titre et l'auteur servent a creer la premiere slide.</p>
                 <p>Les autres valeurs modifient les variables CSS de la presentation : format, couleurs, police et taille de base.</p>
@@ -90,14 +110,14 @@ igtexc main.igtex -p</code></pre>
                 </details>
             </section>
 
-            <section>
+            <section id="sections-et-sous-sections">
                 <h2>Sections et sous-sections</h2>
                 <p>Une frame doit etre placee dans une sous-section, et une sous-section doit etre placee dans une section. Le compileur signale une erreur si cet ordre n'est pas respecte.</p>
                 <pre><code>\section{Partie 1}
 \subsection{Contexte}</code></pre>
             </section>
 
-            <section>
+            <section id="frames">
                 <h2>Frames</h2>
                 <p>Une frame correspond a une slide. Elle prend toujours un titre, peut prendre un sous-titre, des options entre crochets et des animations entre chevrons.</p>
                 <pre><code>\begin{frame}{Titre}
@@ -119,7 +139,7 @@ igtexc main.igtex -p</code></pre>
                 </details>
             </section>
 
-            <section>
+            <section id="animations">
                 <h2>Animations</h2>
                 <p>Les animations de frame se placent apres les options : <code>&lt;AnimationIn, AnimationOut&gt;</code>. Si rien n'est precise, une frame utilise <code>FadeIn</code> et <code>FadeOut</code>.</p>
                 <p>Les pauses utilisent par defaut <code>NoneIn</code> et <code>NoneOut</code>, sauf si vous donnez explicitement une animation.</p>
@@ -143,7 +163,7 @@ Deuxieme contenu.
 \end{frame}</code></pre>
             </section>
 
-            <section>
+            <section id="texte">
                 <h2>Texte</h2>
                 <p>Tout texte place dans une frame devient un paragraphe. Les retours <code>\\</code>, <code>\n</code> et les vrais retours a la ligne creent de nouveaux paragraphes, sauf a l'interieur des formules.</p>
                 <pre><code>Texte simple
@@ -154,7 +174,7 @@ Avant !htab apres</code></pre>
                 <p>Les commentaires inline sont coupes apres <code>#</code> sur les lignes de texte simple.</p>
             </section>
 
-            <section>
+            <section id="equations">
                 <h2>Equations</h2>
                 <p>Les mathematiques sont rendues par KaTeX. Utilisez <code>$...$</code> pour une equation inline et <code>$$...$$</code> pour une equation affichee.</p>
                 <pre><code>Equation inline : $\int_{\mathbb{R}} e^{-x^2} dx = \sqrt{\pi}$
@@ -163,7 +183,7 @@ Equation affichee :
 $$\int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi}$$</code></pre>
             </section>
 
-            <section>
+            <section id="listes">
                 <h2>Listes</h2>
                 <p><code>\item</code> et <code>\subitem</code> creent des lignes de liste. Ils acceptent une animation d'entree parmi les animations <code>In</code>.</p>
                 <pre><code>\item{Premier point}
@@ -172,7 +192,7 @@ $$\int_{-\infty}^{+\infty} e^{-x^2} dx = \sqrt{\pi}$$</code></pre>
 \subitem{Detail anime}[MoveRightIn]</code></pre>
             </section>
 
-            <section>
+            <section id="pauses">
                 <h2>Pauses</h2>
                 <p><code>\pause</code> duplique la frame en cours et separe son contenu en plusieurs etapes. Le contenu avant la pause apparait sur une slide, puis le contenu suivant apparait a l'etape suivante.</p>
                 <pre><code>\begin{frame}{Progression}
@@ -184,7 +204,7 @@ Troisieme etat.
 \end{frame}</code></pre>
             </section>
 
-            <section>
+            <section id="medias">
                 <h2>Medias</h2>
                 <p>Les images, videos et fichiers de code doivent etre places dans un dossier <code>medias</code> situe a cote du fichier <code>.igtex</code>. Par defaut, les medias sont embarques dans le HTML genere.</p>
                 <pre><code>\image{schema.png}[position=top-left, size=2]
@@ -204,20 +224,20 @@ Troisieme etat.
                 </details>
             </section>
 
-            <section>
+            <section id="textboxes">
                 <h2>Textboxes</h2>
                 <p><code>\textbox</code> cree un bloc de texte positionnable. Il accepte les memes options de placement que les medias, plus <code>fontsize</code> et <code>border</code>.</p>
                 <pre><code>\textbox{Message important}[position=right-bottom, border, fontsize=1.2]
 \textbox{Texte anime}[position=top, shift=5+0+0+0, MoveLeftIn]</code></pre>
             </section>
 
-            <section>
+            <section id="iframes">
                 <h2>Iframes</h2>
                 <p><code>\iframe</code> integre une page web si elle repond au moment de la compilation et si le site autorise l'affichage en iframe. Une connexion internet peut donc etre necessaire.</p>
                 <pre><code>\iframe{https://example.com}[position=right, size=1, ZoomIn]</code></pre>
             </section>
 
-            <section>
+            <section id="code">
                 <h2>Code</h2>
                 <p>ImGoaTeX utilise highlight.js pour colorer le code. Les fichiers charges avec <code>\codeblock</code> doivent etre dans <code>medias</code>.</p>
                 <pre><code>\codeline{ dictionary = [i for i in range(10)] }[language=python]
@@ -232,7 +252,7 @@ Troisieme etat.
                 </details>
             </section>
 
-            <section>
+            <section id="exemple-complet">
                 <h2>Exemple complet</h2>
                 <pre><code>%title: Demo ImGoaTeX
 %subtitle: Presentation HTML
@@ -253,7 +273,7 @@ Bienvenue dans **ImGoaTeX**.
 \end{frame}</code></pre>
             </section>
 
-            <section>
+            <section id="erreurs-frequentes">
                 <h2>Erreurs frequentes</h2>
                 <ul>
                     <li>Creer une frame avant une section et une sous-section provoque une erreur.</li>
